@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NICO Capital — Iraq Strategic Partnership Proposal 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root{
+  --cyan:#11F3FE; --violet:#682FF3; --pink:#FE1EDC;
+  --charcoal:#1A1A2E; --charcoal2:#16213E;
+  --gold:#C9A84C; --gold-light:#E8C97A;
+  --muted:rgba(255,255,255,0.55);
+  --border:rgba(255,255,255,0.08);
+  --border-gold:rgba(201,168,76,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;background:var(--charcoal);color:#fff;line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:15px 50px;display:flex;justify-content:space-between;align-items:center;background:rgba(26,26,46,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-gold)}
+.nav-logo{font-weight:800;font-size:1rem;letter-spacing:.08em;color:var(--cyan)}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+
+/* HERO */
+.hero{min-height:100vh;position:relative;display:flex;flex-direction:column;justify-content:center;padding:120px 60px 80px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(104,47,243,.18) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 20% 70%,rgba(17,243,254,.08) 0%,transparent 50%),linear-gradient(170deg,#1A1A2E 0%,#0F1B35 50%,#0A0F1E 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.04) 1px,transparent 1px);background-size:60px 60px}
+.hero-content{position:relative;z-index:2;max-width:920px}
+.eyebrow-tag{display:inline-flex;align-items:center;gap:10px;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:26px;padding:7px 16px;border:1px solid var(--border-gold)}
+.eyebrow-tag::before{content:'';width:18px;height:1px;background:var(--gold)}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:700;line-height:1.08;margin-bottom:12px}
+.hero-title .accent{color:var(--cyan)}
+.hero-title .accent-gold{color:var(--gold)}
+.ar-subtitle{font-size:clamp(1.1rem,2.5vw,1.6rem);color:var(--gold-light);font-weight:300;margin-bottom:30px;opacity:.8;direction:rtl;text-align:right}
+.hero-sub{font-size:.97rem;color:rgba(255,255,255,.67);max-width:640px;line-height:1.85;margin-bottom:48px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;max-width:880px}
+.hstat{background:rgba(255,255,255,.03);border:1px solid var(--border-gold);padding:24px 20px;position:relative;overflow:hidden;transition:background .3s}
+.hstat:hover{background:rgba(255,255,255,.055)}
+.hstat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--violet));opacity:0;transition:opacity .3s}
+.hstat:hover::before{opacity:1}
+.hstat-num{font-size:2rem;font-weight:800;color:var(--cyan);display:block;line-height:1;margin-bottom:5px}
+.hstat-lbl{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.hstat-ar{font-size:.62rem;color:var(--gold);opacity:.6;margin-top:3px;direction:rtl;text-align:right}
+
+/* SECTIONS */
+section{padding:88px 60px;position:relative}
+section+section{border-top:1px solid var(--border)}
+.sec-eyebrow{font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px}
+.sec-ar{font-size:.78rem;color:var(--gold-light);opacity:.6;direction:rtl;text-align:right;display:block;margin-bottom:12px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.85rem,4vw,2.95rem);font-weight:700;line-height:1.2;margin-bottom:14px}
+.sec-title .accent{color:var(--cyan)}
+.sec-intro{font-size:.93rem;color:rgba(255,255,255,.61);max-width:720px;line-height:1.88;margin-bottom:52px}
+.gold-rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:44px 0;opacity:.28}
+
+/* OPP */
+.opp-bg{background:linear-gradient(160deg,#1A1A2E 0%,#0D1B40 100%)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.data-panel{background:rgba(255,255,255,.02);border:1px solid var(--border-gold);padding:34px}
+.dp-title{font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:26px;padding-bottom:12px;border-bottom:1px solid var(--border-gold)}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.mrow:last-child{border-bottom:none}
+.mlbl{font-size:.78rem;color:rgba(255,255,255,.56);font-weight:500}
+.mval{font-size:1rem;font-weight:800;color:var(--cyan);white-space:nowrap;margin-left:14px}
+.chart-box{background:rgba(255,255,255,.02);border:1px solid var(--border-gold);padding:30px;margin-bottom:18px}
+.chart-title{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px}
+
+/* PROBLEM */
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:52px}
+.prob-card{background:rgba(254,30,220,.04);border:1px solid rgba(254,30,220,.14);padding:32px 26px;position:relative}
+.prob-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),transparent)}
+.prob-num{font-size:2.8rem;font-weight:800;color:rgba(254,30,220,.13);line-height:1;margin-bottom:10px;font-family:'Playfair Display',serif}
+.prob-stat{font-size:1.45rem;font-weight:800;color:var(--pink);margin-bottom:6px}
+.prob-desc{font-size:.8rem;color:rgba(255,255,255,.56);line-height:1.7}
+.prob-ar{font-size:.7rem;color:var(--gold);opacity:.5;direction:rtl;text-align:right;display:block;margin-top:6px}
+
+/* SOLUTION */
+.sol-bg{background:radial-gradient(ellipse 100% 80% at 50% 50%,rgba(104,47,243,.12) 0%,transparent 70%),#16213E}
+.story-lead{font-family:'Playfair Display',serif;font-size:1.45rem;color:#fff;line-height:1.55;margin-bottom:22px;font-weight:400;max-width:820px}
+.story-body{font-size:.9rem;color:rgba(255,255,255,.63);line-height:1.92;margin-bottom:18px;max-width:820px}
+.story-hl{background:rgba(17,243,254,.06);border-left:3px solid var(--cyan);padding:18px 26px;margin:26px 0;font-size:.9rem;color:rgba(255,255,255,.73);line-height:1.85;font-style:italic;max-width:820px}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:48px}
+.pillar{background:rgba(17,243,254,.03);border:1px solid rgba(17,243,254,.12);padding:34px 26px;transition:transform .3s,background .3s}
+.pillar:hover{background:rgba(17,243,254,.07);transform:translateY(-4px)}
+.pl-num{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:14px;opacity:.62}
+.pl-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.22}
+.pl-ar{font-size:.75rem;color:var(--gold-light);opacity:.62;direction:rtl;text-align:right;display:block;margin-bottom:12px}
+.pl-icon{width:42px;height:42px;border:1px solid var(--cyan);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:22px;font-size:1.1rem}
+.pl-body{font-size:.8rem;color:rgba(255,255,255,.56);line-height:1.8}
+
+/* GLOBAL COMPS */
+.comps-bg{background:linear-gradient(160deg,#0D1B40 0%,#0A0F1E 100%)}
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:44px}
+.comp-card{background:rgba(255,255,255,.02);border:1px solid var(--border-gold);padding:28px 22px;position:relative;transition:border-color .3s}
+.comp-card:hover{border-color:rgba(201,168,76,.5)}
+.comp-flag{font-size:1.7rem;margin-bottom:7px}
+.comp-name{font-size:.95rem;font-weight:800;color:#fff;margin-bottom:2px}
+.comp-country{font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:13px;font-weight:600}
+.comp-metric{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.73rem}
+.comp-metric:last-child{border-bottom:none}
+.cml{color:var(--muted)}
+.cmv{color:var(--cyan);font-weight:700}
+.comp-tag{position:absolute;top:13px;right:13px;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;font-weight:700}
+.tag-u{background:rgba(201,168,76,.13);color:var(--gold);border:1px solid rgba(201,168,76,.27)}
+.tag-d{background:rgba(17,243,254,.09);color:var(--cyan);border:1px solid rgba(17,243,254,.22)}
+
+/* CALCULATOR */
+.calc-bg{background:radial-gradient(ellipse 70% 60% at 30% 50%,rgba(104,47,243,.1) 0%,transparent 60%),var(--charcoal)}
+.calc-panel{background:rgba(255,255,255,.02);border:1px solid var(--border-gold);padding:36px}
+.calc-head{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:24px;padding-bottom:11px;border-bottom:1px solid var(--border-gold)}
+.calc-row{margin-bottom:20px}
+.calc-lbl{font-size:.73rem;color:rgba(255,255,255,.58);margin-bottom:5px;font-weight:600}
+.calc-slider{width:100%;-webkit-appearance:none;height:3px;background:rgba(255,255,255,.1);outline:none;border-radius:2px}
+.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--cyan);cursor:pointer;border:2px solid var(--charcoal)}
+.calc-display{font-size:1rem;font-weight:800;color:var(--cyan);margin-top:4px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:22px}
+.result-box{background:rgba(17,243,254,.04);border:1px solid rgba(17,243,254,.12);padding:18px 16px}
+.result-lbl{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:5px;line-height:1.5}
+.result-val{font-size:1.3rem;font-weight:800;color:var(--cyan)}
+.be-box{margin-top:18px;padding:16px 20px;border:1px solid rgba(74,222,128,.2);background:rgba(74,222,128,.04)}
+.be-lbl{font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(74,222,128,.8);font-weight:700;margin-bottom:5px}
+.be-val{font-size:1.5rem;font-weight:800;color:#4ADE80}
+.uc-box{margin-top:8px;padding:16px 20px;border:1px solid rgba(201,168,76,.22);background:rgba(201,168,76,.04)}
+.uc-lbl{font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:5px}
+.uc-val{font-size:1.5rem;font-weight:800;color:var(--gold)}
+
+/* ROADMAP */
+.road-bg{background:linear-gradient(170deg,#0A0F1E 0%,#1A1A2E 100%)}
+.timeline{position:relative}
+.timeline::before{content:'';position:absolute;left:38px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--gold),var(--cyan),var(--violet))}
+.phase{display:grid;grid-template-columns:90px 1fr;gap:32px;margin-bottom:46px}
+.phase-marker{display:flex;flex-direction:column;align-items:center;padding-top:3px}
+.phase-dot{width:14px;height:14px;border-radius:50%;background:var(--charcoal);border:2px solid var(--gold);position:relative;z-index:1;transition:background .3s;margin-bottom:9px}
+.phase:hover .phase-dot{background:var(--gold)}
+.phase-time{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;text-align:center;line-height:1.5}
+.phase-content{background:rgba(255,255,255,.02);border:1px solid var(--border-gold);padding:28px 32px;transition:border-color .3s}
+.phase:hover .phase-content{border-color:rgba(201,168,76,.42)}
+.phase-lbl{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:6px}
+.phase-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;margin-bottom:4px}
+.phase-ar{font-size:.75rem;color:var(--gold-light);opacity:.58;direction:rtl;text-align:right;display:block;margin-bottom:16px}
+.phase-ask{display:inline-flex;align-items:center;gap:7px;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;padding:5px 13px;border:1px solid var(--gold);margin-bottom:18px}
+.phase-dl{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.phase-dl li{font-size:.77rem;color:rgba(255,255,255,.56);padding-left:15px;position:relative;line-height:1.58}
+.phase-dl li::before{content:'→';position:absolute;left:0;color:var(--cyan);font-size:.7rem}
+
+/* PILOT */
+.pilot-bg{background:radial-gradient(ellipse 80% 60% at 30% 50%,rgba(17,243,254,.07) 0%,transparent 60%),var(--charcoal)}
+.corridor{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin-bottom:48px;max-width:860px}
+.corr-node{background:rgba(255,255,255,.03);border:1px solid var(--border-gold);padding:30px 24px;text-align:center}
+.corr-flag{font-size:2.6rem;margin-bottom:9px;display:block}
+.corr-title{font-size:.92rem;font-weight:700;color:#fff;margin-bottom:3px}
+.corr-sub{font-size:.7rem;color:var(--muted)}
+.mkt-nums{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;max-width:880px;margin-bottom:48px}
+.mkt-num{background:rgba(17,243,254,.04);border:1px solid rgba(17,243,254,.12);padding:24px 20px}
+.mkt-val{font-size:1.6rem;font-weight:800;color:var(--cyan);display:block;margin-bottom:4px}
+.mkt-lbl{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;line-height:1.5}
+
+/* RISK */
+.risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.rcard{padding:28px;border:1px solid var(--border)}
+.rcard-h{border-color:rgba(254,30,220,.2);background:rgba(254,30,220,.03)}
+.rcard-m{border-color:rgba(201,168,76,.2);background:rgba(201,168,76,.03)}
+.rcard-l{border-color:rgba(17,243,254,.15);background:rgba(17,243,254,.02)}
+.rlvl{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:7px}
+.rcard-h .rlvl{color:var(--pink)}
+.rcard-m .rlvl{color:var(--gold)}
+.rcard-l .rlvl{color:var(--cyan)}
+.rtitle{font-size:.9rem;font-weight:700;color:#fff;margin-bottom:8px}
+.rbody{font-size:.77rem;color:rgba(255,255,255,.5);line-height:1.68}
+.rmit{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05);font-size:.72rem;color:rgba(255,255,255,.33);font-style:italic}
+
+/* PROFILE */
+.prof-bg{background:linear-gradient(160deg,#0D1B40 0%,#1A1A2E 100%)}
+.prof-layout{display:grid;grid-template-columns:300px 1fr;gap:64px;align-items:start}
+.photo-wrap{position:relative;width:260px;height:260px;overflow:hidden;border:2px solid var(--gold)}
+.photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(8%) contrast(1.05)}
+.photo-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,rgba(26,26,46,.6))}
+.prof-name{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#fff;margin-top:17px;margin-bottom:3px}
+.prof-role{font-size:.67rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px}
+.prof-badge{display:block;font-size:.65rem;letter-spacing:.07em;color:var(--cyan);padding:6px 12px;border:1px solid rgba(17,243,254,.2);background:rgba(17,243,254,.04);margin-bottom:5px;font-weight:600}
+.pp-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:30px}
+.pp-box{background:rgba(255,255,255,.02);border:1px solid var(--border-gold);padding:18px 15px}
+.pp-val{font-size:1.3rem;font-weight:800;color:var(--cyan);display:block;margin-bottom:3px}
+.pp-lbl{font-size:.62rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600;line-height:1.5}
+.cred-block{margin-bottom:30px}
+.cred-lbl{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border-gold)}
+.cred-item{margin-bottom:20px;padding-left:15px;border-left:2px solid var(--cyan)}
+.cred-role{font-size:.82rem;font-weight:700;color:#fff;margin-bottom:2px}
+.cred-co{font-size:.72rem;color:var(--gold);margin-bottom:5px;font-weight:600}
+.cred-desc{font-size:.77rem;color:rgba(255,255,255,.5);line-height:1.7}
+.quote-block{padding:20px 24px;border-left:3px solid var(--gold);background:rgba(201,168,76,.04);margin-bottom:16px;font-family:'Playfair Display',serif;font-size:.97rem;color:#fff;line-height:1.6;font-style:italic}
+
+/* ASK */
+.ask-bg{background:linear-gradient(160deg,#0A0F1E 0%,#12082C 100%)}
+.ask-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:46px}
+.ask-card{background:rgba(255,255,255,.02);border:1px solid var(--border-gold);padding:36px 28px;transition:background .3s}
+.ask-card:hover{background:rgba(255,255,255,.04)}
+.ask-ph{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:13px}
+.ask-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.2}
+.ask-ar{font-size:.72rem;color:var(--gold-light);opacity:.58;direction:rtl;text-align:right;display:block;margin-bottom:17px}
+.ask-body{font-size:.79rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:20px}
+.ask-tag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);font-weight:700;padding:4px 12px;border:1px solid rgba(17,243,254,.26);display:inline-block}
+.cta-block{background:linear-gradient(90deg,rgba(104,47,243,.12),rgba(17,243,254,.06));border:1px solid rgba(17,243,254,.2);padding:48px 42px;display:grid;grid-template-columns:2fr 1fr;gap:46px;align-items:center}
+.cta-title{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.3}
+.cta-ar{font-size:.9rem;color:var(--gold-light);opacity:.65;direction:rtl;text-align:right;display:block;margin-bottom:16px}
+.cta-body{font-size:.86rem;color:rgba(255,255,255,.56);line-height:1.82}
+.contact-box{background:rgba(255,255,255,.02);border:1px solid var(--border-gold);padding:28px 22px}
+.contact-head{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border-gold)}
+.contact-role{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:2px}
+.contact-name{font-size:.85rem;font-weight:700;color:#fff}
+
+footer{padding:30px 60px;border-top:1px solid var(--border-gold);display:flex;justify-content:space-between;align-items:center;background:#0A0F1E}
+.fl{font-weight:800;font-size:.85rem;letter-spacing:.1em;color:var(--cyan)}
+.flegal{font-size:.62rem;color:var(--muted);text-align:center;line-height:1.6}
+.freg{font-size:.62rem;color:var(--muted);text-align:right}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+@media(max-width:900px){
+  nav{padding:13px 18px}.nav-links{display:none}
+  section{padding:56px 22px}.hero{padding:96px 22px 56px}
+  .hero-stats,.prob-grid,.pillars,.ask-grid,.comp-grid{grid-template-columns:1fr!important}
+  .grid2,.prof-layout,.risk-grid,.phase-dl{grid-template-columns:1fr!important}
+  .corridor{grid-template-columns:1fr!important}
+  .mkt-nums{grid-template-columns:1fr 1fr!important}
+  .pp-grid{grid-template-columns:1fr 1fr!important}
+  .cta-block{grid-template-columns:1fr!important}
+  .hero-stats{grid-template-columns:1fr 1fr!important}
+  .phase{grid-template-columns:58px 1fr!important;gap:20px}
+  .timeline::before{left:26px!important}
+  footer{flex-direction:column;gap:12px;text-align:center}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo">NICO <span>×</span> IRAQ</div>
+  <ul class="nav-links">
+    <li><a href="#opp">Opportunity</a></li>
+    <li><a href="#sol">Solution</a></li>
+    <li><a href="#global">Global Proof</a></li>
+    <li><a href="#calc">ROI Calculator</a></li>
+    <li><a href="#road">Roadmap</a></li>
+    <li><a href="#team">Leadership</a></li>
+    <li><a href="#ask">Partnership</a></li>
+  </ul>
+</nav>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="eyebrow-tag">Confidential Strategic Proposal — June 2026</div>
+    <h1 class="hero-title">Iraq's Financial<br><span class="accent">Future</span> Starts<br><span class="accent-gold">Here.</span></h1>
+    <div class="ar-subtitle">مستقبل العراق المالي يبدأ هنا</div>
+    <p class="hero-sub">NICO Capital proposes a phased sovereign partnership with the Central Bank of Iraq and the Ministry of Finance — beginning with the UK–Iraq digital remittance corridor and scaling to full digital banking integration serving Iraq's 46 million citizens.</p>
+    <div class="hero-stats">
+      <div class="hstat reveal"><span class="hstat-num">46M</span><div class="hstat-lbl">Population — Median Age 21</div><div class="hstat-ar">عدد السكان — متوسط العمر ٢١</div></div>
+      <div class="hstat reveal d1"><span class="hstat-num">26M+</span><div class="hstat-lbl">Adults Unbanked or Underserved</div><div class="hstat-ar">بالغ غير مخدوم مصرفياً</div></div>
+      <div class="hstat reveal d2"><span class="hstat-num">84%</span><div class="hstat-lbl">Internet Penetration 2025</div><div class="hstat-ar">انتشار الإنترنت ٢٠٢٥</div></div>
+      <div class="hstat reveal d3"><span class="hstat-num">$515B</span><div class="hstat-lbl">GDP — The Region's Sleeping Giant</div><div class="hstat-ar">الناتج المحلي — العملاق النائم</div></div>
+    </div>
+  </div>
+</section>
+<section id="opp" class="opp-bg">
+  <div class="sec-eyebrow">Part I — The Opportunity</div>
+  <span class="sec-ar">الجزء الأول — الفرصة</span>
+  <h2 class="sec-title">Iraq's Banking Gap is the<br><span class="accent">Largest Untapped Opportunity</span><br>in the Middle East.</h2>
+  <p class="sec-intro">A nation of 46 million people. GDP of $515 billion. A median age of 21 years. And a banking sector so underdeveloped that credit represents just 9% of GDP — against 64% in the UAE and 100% in Qatar. The National Financial Inclusion Strategy 2025–2029 targets 50% account ownership and 85% digital payment adoption by 2030. The policy window is open. The demographic wave is building. The first credible operator to move will shape a generation.</p>
+  <div class="grid2">
+    <div>
+      <div class="chart-box reveal"><div class="chart-title">Credit-to-GDP Ratio — Iraq vs. Regional Peers (%)</div><canvas id="chart-credit" height="200"></canvas></div>
+      <div class="chart-box reveal"><div class="chart-title">Financial Inclusion Trajectory — Iraq 2018–2030 (%)</div><canvas id="chart-inclusion" height="185"></canvas></div>
+      <div class="chart-box reveal"><div class="chart-title">Digital Payment Volume Growth — Monthly (Trillion IQD)</div><canvas id="chart-payments" height="175"></canvas></div>
+    </div>
+    <div class="data-panel reveal">
+      <div class="dp-title">Iraq — Key Financial Metrics 2025–2026</div>
+      <div class="mrow"><div class="mlbl">Total Commercial Banks</div><div class="mval">72</div></div><div class="mrow"><div class="mlbl">State Bank Asset Share</div><div class="mval">80–85%</div></div><div class="mrow"><div class="mlbl">Adults with Bank Accounts (2025)</div><div class="mval">~40%</div></div><div class="mrow"><div class="mlbl">Adults Still Unbanked</div><div class="mval">26M+</div></div><div class="mrow"><div class="mlbl">Mobile Connections</div><div class="mval">50.8M</div></div><div class="mrow"><div class="mlbl">Internet Penetration</div><div class="mval">83.8%</div></div><div class="mrow"><div class="mlbl">Social Media Users</div><div class="mval">40.1M</div></div><div class="mrow"><div class="mlbl">Monthly E-Payment Volume</div><div class="mval">7.6T IQD</div></div><div class="mrow"><div class="mlbl">Credit-to-GDP Ratio</div><div class="mval">9%</div></div><div class="mrow"><div class="mlbl">NFIS Account Target 2030</div><div class="mval">50%</div></div><div class="mrow"><div class="mlbl">NFIS Digital Payment Target</div><div class="mval">85%</div></div><div class="mrow"><div class="mlbl">Sector NPL Ratio</div><div class="mval">14.7%</div></div>
+    </div>
+  </div>
+</section>
+<section id="prob">
+  <div class="sec-eyebrow">Part II — The Challenge</div>
+  <span class="sec-ar">الجزء الثاني — التحدي</span>
+  <h2 class="sec-title">Why 26 Million Iraqis Remain<br><span class="accent">Outside</span> the System.</h2>
+  <p class="sec-intro">The barriers are structural, cultural, and historical — not digital. Iraq's mobile and internet infrastructure is modern and near-universal. What 26 million people lack is a financial product they can trust, access, and genuinely use. That is precisely what NICO is built to deliver.</p>
+  <div class="prob-grid"><div class="prob-card reveal"><div class="prob-num">01</div><div class="prob-stat">57%</div><div class="prob-desc">Of Iraq's monetary base exists as physical cash. Shadow economy and hawala networks fill the gap — at enormous cost to individual wealth-building and national transparency.</div><span class="prob-ar">٥٧٪ من القاعدة النقدية ورقية</span></div><div class="prob-card reveal"><div class="prob-num">02</div><div class="prob-stat">14.7%</div><div class="prob-desc">Non-performing loan ratio — more than double international benchmarks. Legacy state-directed lending has paralysed the system's ability to serve ordinary citizens and SMEs.</div><span class="prob-ar">نسبة القروض المتعثرة ضعف المعايير الدولية</span></div><div class="prob-card reveal"><div class="prob-num">03</div><div class="prob-stat"><5%</div><div class="prob-desc">Of Iraqi SMEs access formal bank lending. Millions of businesses operate on cash and informal credit. The SME financing gap alone represents a multi-billion dollar opportunity.</div><span class="prob-ar">أقل من ٥٪ من المنشآت الصغيرة تحصل على تمويل رسمي</span></div><div class="prob-card reveal"><div class="prob-num">04</div><div class="prob-stat">30+</div><div class="prob-desc">Private Iraqi banks sanctioned by OFAC by mid-2025, cutting businesses and citizens off from international payments and strangling cross-border trade.</div><span class="prob-ar">أكثر من ٣٠ بنكاً خاضعاً للعقوبات الأمريكية</span></div><div class="prob-card reveal"><div class="prob-num">05</div><div class="prob-stat">9%</div><div class="prob-desc">Credit-to-GDP ratio in a $515 billion economy. The gap versus neighbours is measured in decades — unless the right partner accelerates the transition.</div><span class="prob-ar">نسبة الائتمان إلى الناتج ٩٪ في اقتصاد ب ٥١٥ مليار دولار</span></div><div class="prob-card reveal"><div class="prob-num">06</div><div class="prob-stat">$6B+</div><div class="prob-desc">Estimated total Iraqi diaspora remittance flows annually. Only $1.2B flows through formal channels. The rest lost to opaque, expensive, unregulated hawala networks.</div><span class="prob-ar">التحويلات الإجمالية — ٨٠٪ عبر قنوات غير رسمية</span></div></div>
+</section>
+<section id="sol" class="sol-bg">
+  <div class="sec-eyebrow">Part III — The NICO Solution</div>
+  <span class="sec-ar">الجزء الثالث — الحل</span>
+  <h2 class="sec-title">The Story Has Been Written Before.<br><span class="accent">We Know How It Ends.</span></h2>
+  <div class="story-lead">In 2013, Brazil had a population of 200 million, a banking sector controlled by five state-backed giants, and 60 million adults without a bank account. Nubank launched with a single credit card and a mobile app. Today, it serves 100 million customers and is valued at $30 billion. Iraq in 2026 is that moment.</div>
+  <div class="story-hl">The pattern is documented across every major emerging market: Paytm in India, M-Pesa in Kenya, GCash in the Philippines. When a chronically underbanked population meets a trusted digital product at the right regulatory moment, the growth is not linear. It is exponential. Iraq's National Financial Inclusion Strategy 2025–2029 has created precisely that moment. Monthly digital payment volumes have tripled in two years — from 2.6 trillion IQD to 7.6 trillion IQD. The CBI has issued digital banking regulations. 70+ entities have applied. What Iraq does not yet have is the right operator.</div>
+  <div class="story-body">NICO Capital does not arrive in Iraq as another startup chasing a licence. We arrive as operators who have built at scale — who scaled Zilch from 100,000 to 3 million+ customers in 18 months, who built the real-time systems that underpin a $2 billion unicorn. We are not proposing to pilot a product. We are proposing to co-build the financial infrastructure of a nation — with the Iraqi government as our founding partner.</div>
+  <div class="pillars"><div class="pillar reveal"><div class="pl-icon">🔗</div><div class="pl-num">Pillar One</div><div class="pl-title">Remittance Corridor</div><span class="pl-ar">ممر التحويلات المالية</span><div class="pl-body">NICO opens the UK–Iraq digital remittance corridor — connecting 450,000+ Iraqi diaspora in Britain with families across all 18 governorates. Real-time, IQD-denominated, FCA and CBI compliant. Every transaction is proof of delivery — the trust-building gateway that earns the right to everything that follows.</div></div><div class="pillar reveal"><div class="pl-icon">🏛️</div><div class="pl-num">Pillar Two</div><div class="pl-title">Government Co-Build</div><span class="pl-ar">الشراكة الحكومية في البناء</span><div class="pl-body">A formal MOU with the Central Bank of Iraq and the Ministry of Finance to jointly develop digital financial infrastructure aligned with NFIS 2025–2029. NICO brings the technology, built entirely in-house by Nexa9; Iraq brings the mandate and distribution. This is not a vendor relationship. It is a founding partnership.</div></div><div class="pillar reveal"><div class="pl-icon">📱</div><div class="pl-num">Pillar Three</div><div class="pl-title">Digital Banking at Scale</div><span class="pl-ar">الخدمات المصرفية الرقمية</span><div class="pl-body">Following a successful pilot, NICO applies for a digital banking licence under the CBI's 2024 framework. The platform serves unbanked youth (median age 21), government employees, SMEs, and cross-border merchants. Full IQD accounts, Visa/Mastercard, micro-lending with digital credit scoring, and Islamic finance products.</div></div></div>
+</section>
+<section id="global" class="comps-bg">
+  <div class="sec-eyebrow">Part IV — Global Proof</div>
+  <span class="sec-ar">الجزء الرابع — الإثبات العالمي</span>
+  <h2 class="sec-title">Every Major Emerging Market Has Had Its<br><span class="accent">Neobank Moment.</span> Iraq's Is Now.</h2>
+  <p class="sec-intro">The following companies entered markets that looked exactly like Iraq does today: large unbanked populations, distrust in legacy banks, nascent digital infrastructure, and a government finally ready to act. Each one became a category-defining institution worth billions. The pattern is documented. The playbook exists. The question is whether Iraq acts as a passive observer — or an active co-creator of its own financial future.</p>
+  <div class="comp-grid"><div class="comp-card reveal"><div class="comp-tag tag-d">Decacorn</div><div class="comp-flag">🇧🇷</div><div class="comp-name">Nubank</div><div class="comp-country">Brazil · Founded 2013</div><div class="comp-metric"><span class="cml">Valuation</span><span class="cmv">$30B (NYSE: NU)</span></div><div class="comp-metric"><span class="cml">Customers</span><span class="cmv">100M+</span></div><div class="comp-metric"><span class="cml">Year 1 users</span><span class="cmv">~50,000</span></div><div class="comp-metric"><span class="cml">Context at launch</span><span class="cmv">60M unbanked</span></div><div class="comp-metric"><span class="cml">Iraq parallel</span><span class="cmv">26M+ unbanked today</span></div></div><div class="comp-card reveal"><div class="comp-tag tag-u">Unicorn</div><div class="comp-flag">🇰🇪</div><div class="comp-name">M-Pesa</div><div class="comp-country">Kenya · Founded 2007</div><div class="comp-metric"><span class="cml">Valuation</span><span class="cmv">$1B+ (Safaricom)</span></div><div class="comp-metric"><span class="cml">Customers</span><span class="cmv">51M+</span></div><div class="comp-metric"><span class="cml">GDP share</span><span class="cmv">50%+ Kenya GDP</span></div><div class="comp-metric"><span class="cml">Context</span><span class="cmv">Cash-only economy</span></div><div class="comp-metric"><span class="cml">Iraq parallel</span><span class="cmv">57% cash monetary base</span></div></div><div class="comp-card reveal"><div class="comp-tag tag-u">Unicorn</div><div class="comp-flag">🇮🇳</div><div class="comp-name">Paytm</div><div class="comp-country">India · Founded 2010</div><div class="comp-metric"><span class="cml">Peak valuation</span><span class="cmv">$16B</span></div><div class="comp-metric"><span class="cml">Customers</span><span class="cmv">350M+</span></div><div class="comp-metric"><span class="cml">Growth trigger</span><span class="cmv">Gov. demonetisation</span></div><div class="comp-metric"><span class="cml">Context</span><span class="cmv">80% unbanked</span></div><div class="comp-metric"><span class="cml">Iraq parallel</span><span class="cmv">Gov. e-payment mandate 2025</span></div></div><div class="comp-card reveal"><div class="comp-tag tag-u">Unicorn</div><div class="comp-flag">🇿🇦</div><div class="comp-name">TymeBank</div><div class="comp-country">South Africa · 2018</div><div class="comp-metric"><span class="cml">Valuation</span><span class="cmv">$1.5B</span></div><div class="comp-metric"><span class="cml">Customers</span><span class="cmv">9M+</span></div><div class="comp-metric"><span class="cml">Time to 1M users</span><span class="cmv">9 months</span></div><div class="comp-metric"><span class="cml">Context</span><span class="cmv">Post-conflict exclusion</span></div><div class="comp-metric"><span class="cml">Iraq parallel</span><span class="cmv">Post-war trust deficit</span></div></div><div class="comp-card reveal"><div class="comp-tag tag-u">Unicorn</div><div class="comp-flag">🇵🇭</div><div class="comp-name">GCash</div><div class="comp-country">Philippines · 2004</div><div class="comp-metric"><span class="cml">Valuation</span><span class="cmv">$5B</span></div><div class="comp-metric"><span class="cml">Customers</span><span class="cmv">94M+</span></div><div class="comp-metric"><span class="cml">Revenue model</span><span class="cmv">Remittance + payments</span></div><div class="comp-metric"><span class="cml">Context</span><span class="cmv">OFW remittance gap</span></div><div class="comp-metric"><span class="cml">Iraq parallel</span><span class="cmv">UK–Iraq diaspora corridor</span></div></div><div class="comp-card reveal" style="border-color:rgba(17,243,254,.28);background:rgba(17,243,254,.04)"><div class="comp-tag tag-d">NICO</div><div class="comp-flag">🇮🇶</div><div class="comp-name">NICO Iraq</div><div class="comp-country">Iraq · Proposed 2026</div><div class="comp-metric"><span class="cml">Target valuation (7yr)</span><span class="cmv">$1B+</span></div><div class="comp-metric"><span class="cml">Target customers (5yr)</span><span class="cmv">2M–5M</span></div><div class="comp-metric"><span class="cml">Entry product</span><span class="cmv">UK–Iraq remittance</span></div><div class="comp-metric"><span class="cml">Addressable market</span><span class="cmv">26M+ unbanked</span></div><div class="comp-metric"><span class="cml">Status</span><span class="cmv">Seeking MOU</span></div></div></div>
+  <div class="chart-box reveal">
+    <div class="chart-title">Neobank Time-to-Unicorn vs Market Entry Conditions — Global Benchmarks (★ = NICO Iraq projected)</div>
+    <canvas id="chart-unicorn" height="200"></canvas>
+  </div>
+</section>
+<section id="calc" class="calc-bg">
+  <div class="sec-eyebrow">Part V — Revenue &amp; Unicorn Calculator</div>
+  <span class="sec-ar">الجزء الخامس — حاسبة الإيرادات واليونيكورن</span>
+  <h2 class="sec-title">Model the Opportunity.<br><span class="accent">Run the Numbers.</span></h2>
+  <p class="sec-intro">Adjust the assumptions below to model NICO's path to revenue-positive operations and a billion-dollar valuation in Iraq. All figures represent conservative-to-base case projections. The upside scenario assumes government-mandated distribution of NICO's payment rails across Iraqi public sector entities.</p>
+  <div class="grid2">
+    <div class="calc-panel reveal">
+      <div class="calc-head">Adjust Assumptions</div>
+      <div class="calc-row"><div class="calc-lbl">Monthly User Acquisition (Year 2)</div><input type="range" class="calc-slider" id="sl-useracq" min="1000" max="50000" value="10000" step="1000" oninput="calcUpdate()"><div class="calc-display" id="dv-useracq">10,000 users/mo</div></div><div class="calc-row"><div class="calc-lbl">Avg Remittance per User / Month (USD)</div><input type="range" class="calc-slider" id="sl-remit" min="100" max="800" value="250" step="50" oninput="calcUpdate()"><div class="calc-display" id="dv-remit">$250 / user</div></div><div class="calc-row"><div class="calc-lbl">NICO Take Rate on Remittance (%)</div><input type="range" class="calc-slider" id="sl-take" min="0.5" max="3.5" value="1.5" step="0.1" oninput="calcUpdate()"><div class="calc-display" id="dv-take">1.5%</div></div><div class="calc-row"><div class="calc-lbl">Monthly Active Wallet Users (Year 3)</div><input type="range" class="calc-slider" id="sl-wallet" min="50000" max="1000000" value="250000" step="50000" oninput="calcUpdate()"><div class="calc-display" id="dv-wallet">250,000</div></div><div class="calc-row"><div class="calc-lbl">Avg Monthly Wallet Spend / User (USD)</div><input type="range" class="calc-slider" id="sl-spend" min="20" max="200" value="60" step="10" oninput="calcUpdate()"><div class="calc-display" id="dv-spend">$60 / user</div></div><div class="calc-row"><div class="calc-lbl">Wallet Interchange Rate (%)</div><input type="range" class="calc-slider" id="sl-inter" min="0.5" max="2.0" value="1.0" step="0.1" oninput="calcUpdate()"><div class="calc-display" id="dv-inter">1.0%</div></div>
+    </div>
+    <div>
+      <div class="calc-panel reveal">
+        <div class="calc-head">Projected Results</div>
+        <div class="result-grid"><div class="result-box"><div class="result-lbl">Monthly Remittance Revenue (Yr 2)</div><div class="result-val" id="rv-remit">$375K</div></div><div class="result-box"><div class="result-lbl">Monthly Wallet Revenue (Yr 3)</div><div class="result-val" id="rv-wallet">$150K</div></div><div class="result-box"><div class="result-lbl">Combined Annual Revenue (Yr 3)</div><div class="result-val" id="rv-annual">$6.3M</div></div><div class="result-box"><div class="result-lbl">Revenue at ~1M Users (Yr 5)</div><div class="result-val" id="rv-1m">$38M</div></div></div>
+        <div class="be-box"><div class="be-lbl">⚡ Estimated Break-Even Point</div><div class="be-val" id="rv-be">Month 22</div></div>
+        <div class="uc-box"><div class="uc-lbl">🦄 Unicorn Pathway (10× Revenue Multiple)</div><div class="uc-val" id="rv-uc">Year 7 at $100M ARR</div></div>
+      </div>
+      <div class="chart-box reveal" style="margin-top:18px">
+        <div class="chart-title">NICO Iraq Revenue Trajectory (USD Millions)</div>
+        <canvas id="chart-revenue" height="220"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="pilot" class="pilot-bg">
+  <div class="sec-eyebrow">Part VI — The Pilot Programme</div>
+  <span class="sec-ar">الجزء السادس — البرنامج التجريبي</span>
+  <h2 class="sec-title">Phase 1 Pilot: The<br><span class="accent">UK–Iraq</span> Remittance Corridor.</h2>
+  <p class="sec-intro">A 12-month regulated pilot programme, jointly designed with the Central Bank of Iraq, to digitise the UK–Iraq remittance corridor. Measurable. Low-risk. High-visibility. Proof of delivery before any larger commitment is made on either side.</p>
+  <div class="corridor reveal">
+    <div class="corr-node">
+      <span class="corr-flag">🇬🇧</span>
+      <div class="corr-title">United Kingdom</div>
+      <div class="corr-sub">450,000+ Iraqi diaspora · FCA-regulated</div>
+    </div>
+    <div style="text-align:center;padding:20px">
+      <div style="font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:10px">NICO Platform</div>
+      <svg width="80" height="30" viewBox="0 0 80 30"><line x1="0" y1="15" x2="68" y2="15" stroke="#11F3FE" stroke-width="1.5"/><polygon points="62,9 78,15 62,21" fill="#11F3FE"/></svg>
+      <div style="font-size:.6rem;color:var(--gold);margin:6px 0">Real-time · IQD · Compliant</div>
+      <svg width="80" height="30" viewBox="0 0 80 30" style="transform:scaleX(-1)"><line x1="0" y1="15" x2="68" y2="15" stroke="#682FF3" stroke-width="1.5" stroke-dasharray="4,3"/><polygon points="62,9 78,15 62,21" fill="#682FF3"/></svg>
+    </div>
+    <div class="corr-node">
+      <span class="corr-flag">🇮🇶</span>
+      <div class="corr-title">Iraq</div>
+      <div class="corr-sub">CBI-regulated · All 18 governorates</div>
+    </div>
+  </div>
+  <div class="mkt-nums">
+    <div class="mkt-num reveal"><span class="mkt-val">450K+</span><div class="mkt-lbl">Iraqi Diaspora in United Kingdom</div></div>
+    <div class="mkt-num reveal d1"><span class="mkt-val">$1.2B</span><div class="mkt-lbl">Formal Remittances per Year (2023)</div></div>
+    <div class="mkt-num reveal d2"><span class="mkt-val">3–5×</span><div class="mkt-lbl">Estimated Informal Hawala Flows Above Formal</div></div>
+    <div class="mkt-num reveal d3"><span class="mkt-val">10%</span><div class="mkt-lbl">CAGR — Digital Remittances to Iraq 2024–2028</div></div>
+  </div>
+</section>
+<section id="road" class="road-bg">
+  <div class="sec-eyebrow">Part VII — Phased Roadmap</div>
+  <span class="sec-ar">الجزء السابع — خارطة الطريق المرحلية</span>
+  <h2 class="sec-title">From MOU to Market Leader.<br>A <span class="accent">Four-Phase</span> Deployment.</h2>
+  <p class="sec-intro">Each phase is gated by measurable outcomes and full regulatory compliance. NICO does not rush. We build foundations that last — and we build them with you.</p>
+  <div class="timeline"><div class="phase reveal">
+  <div class="phase-marker"><div class="phase-dot"></div><div class="phase-time">Months
+1–3</div></div>
+  <div class="phase-content">
+    <div class="phase-lbl">Phase 0 — Foundation</div>
+    <div class="phase-title">Establish & Align</div>
+    <span class="phase-ar">التأسيس والتوافق</span>
+    <div class="phase-ask">Commercial Ask: Memorandum of Understanding</div>
+    <ul class="phase-dl"><li>Formal MOU with CBI and/or Ministry of Finance</li><li>Iraqi legal entity or partnership structure agreed</li><li>In-country legal counsel and compliance framework</li><li>Stakeholder mapping: CBI, PMO, KRG Finance Ministry</li><li>Technical scoping with Nexa9 engineering team</li><li>Regulatory licensing application strategy submitted</li></ul>
+  </div>
+</div><div class="phase reveal">
+  <div class="phase-marker"><div class="phase-dot"></div><div class="phase-time">Months
+3–15</div></div>
+  <div class="phase-content">
+    <div class="phase-lbl">Phase 1 — Pilot</div>
+    <div class="phase-title">UK–Iraq Remittance Corridor Live</div>
+    <span class="phase-ar">تشغيل ممر التحويلات</span>
+    <div class="phase-ask">Commercial Ask: E-Payment Licence</div>
+    <ul class="phase-dl"><li>CBI E-Payment Licence (10B IQD capital; 90-day review)</li><li>FCA registration for UK-side operations</li><li>NICO Remittance app launched (iOS + Android, AR + EN)</li><li>50,000 users; $25M+ in transactions within 12 months</li><li>IQD correspondent banking settlement established</li><li>Monthly CBI reporting; quarterly Ministry of Finance</li></ul>
+  </div>
+</div><div class="phase reveal">
+  <div class="phase-marker"><div class="phase-dot"></div><div class="phase-time">Months
+15–36</div></div>
+  <div class="phase-content">
+    <div class="phase-lbl">Phase 2 — Expansion</div>
+    <div class="phase-title">Consumer Platform & SME Onboarding</div>
+    <span class="phase-ar">التوسع والمنصة الاستهلاكية</span>
+    <div class="phase-ask">Commercial Ask: Co-Investment Discussions</div>
+    <ul class="phase-dl"><li>Full consumer digital wallet in IQD + multi-currency</li><li>Kurdistan Region (Erbil/Sulaymaniyah) priority expansion</li><li>10,000 SME merchants onboarded</li><li>500,000 total users by end of Phase 2</li><li>Islamic finance product suite (Sharia-compliant)</li><li>EU–Iraq corridors: Germany, Sweden, Netherlands</li></ul>
+  </div>
+</div><div class="phase reveal">
+  <div class="phase-marker"><div class="phase-dot"></div><div class="phase-time">Months
+36–72</div></div>
+  <div class="phase-content">
+    <div class="phase-lbl">Phase 3 — Digital Bank</div>
+    <div class="phase-title">Full Banking Licence & National Footprint</div>
+    <span class="phase-ar">الترخيص المصرفي الكامل</span>
+    <div class="phase-ask">Commercial Ask: Co-Investment Close</div>
+    <ul class="phase-dl"><li>Digital banking licence filed under CBI 2024 framework</li><li>Full accounts, savings, Visa/Mastercard debit issued</li><li>SME micro-lending with digital credit scoring</li><li>2M+ users across all 18 Iraqi governorates</li><li>Women's financial inclusion programme (NFIS-aligned)</li><li>CBDC Digital Dinar infrastructure partnership with CBI</li></ul>
+  </div>
+</div></div>
+  <div class="chart-box reveal" style="margin-top:20px">
+    <div class="chart-title">NICO Iraq — Projected Cumulative User Growth (Base / Upside / Conservative)</div>
+    <canvas id="chart-growth" height="200"></canvas>
+  </div>
+</section>
+<section id="risk">
+  <div class="sec-eyebrow">Part VIII — Risk Assessment</div>
+  <span class="sec-ar">الجزء الثامن — تقييم المخاطر</span>
+  <h2 class="sec-title">We Know the Risks.<br>We Have the <span class="accent">Answers.</span></h2>
+  <p class="sec-intro">NICO has operated in sanctioned-adjacent, cash-first, dollarised markets before. Iraq's risks are real — but they are known, manageable, and in most cases shared with the Iraqi government itself.</p>
+  <div class="risk-grid reveal"><div class="rcard rcard-h"><div class="rlvl">High — Active Risk</div><div class="rtitle">OFAC Sanctions on Iraqi Banks</div><div class="rbody">30+ private Iraqi banks restricted from USD transactions. Selecting compliant partners is critical for any international operator.</div><div class="rmit">Mitigation: NICO operates in IQD domestically; partners only with OFAC-clean, CBI-compliant institutions. UK FCA registration provides additional credibility layer.</div></div><div class="rcard rcard-h"><div class="rlvl">High — Structural Risk</div><div class="rtitle">Dollar Ban & IQD Volatility</div><div class="rbody">Since January 2024, cash USD transactions are prohibited in Iraq. All internal trade in IQD. Parallel exchange rate creates uncertainty for international operators.</div><div class="rmit">Mitigation: NICO builds natively in IQD. Foreign trade settled in EUR/AED/TRY as permitted. Currency risk managed at London treasury level.</div></div><div class="rcard rcard-m"><div class="rlvl">Medium — Political Risk</div><div class="rtitle">Federal vs. KRG Dynamics</div><div class="rbody">Kurdistan Regional Government operates with significant autonomy. Dual compliance requirements can create friction for national operators.</div><div class="rmit">Mitigation: NICO engages both Baghdad and Erbil from day one. KRG is a safer, more financially sophisticated entry point and treated as a strategic priority.</div></div><div class="rcard rcard-m"><div class="rlvl">Medium — Social Risk</div><div class="rtitle">Deep-Rooted Cash Culture</div><div class="rbody">98% of Iraqi e-commerce remains cash-on-delivery. Distrust of financial institutions is a legacy of war, sanctions, and bank freezes.</div><div class="rmit">Mitigation: NICO starts with remittances — the strongest existing motivation to go digital. Government salary mandates create institutional pull.</div></div><div class="rcard rcard-l"><div class="rlvl">Lower — Competitive Risk</div><div class="rtitle">Incumbent Fintech Players</div><div class="rbody">Qi Card (10M users), ZainCash (1.2M+), and FIB (~900K) have advantages in specific segments. The market is not empty.</div><div class="rmit">Mitigation: NICO's differentiation: international reach (UK-Iraq corridor), sovereign partnership positioning, full-stack Nexa9 technology. No incumbent offers a London-regulated international remittance product.</div></div><div class="rcard rcard-l"><div class="rlvl">Lower — Regulatory Risk</div><div class="rtitle">Digital Bank Licensing Queue</div><div class="rbody">~70 entities have applied for digital banking licences. CBI review timelines are evolving. The reform programme may reshape the competitive landscape.</div><div class="rmit">Mitigation: NICO enters via E-Payment Licence first (faster, lower capital). MOU positions NICO as preferred partner. The reform wave creates openings, not closures.</div></div></div>
+</section>
+<section id="team" class="prof-bg">
+  <div class="sec-eyebrow">Part IX — Leadership</div>
+  <span class="sec-ar">الجزء التاسع — القيادة</span>
+  <h2 class="sec-title">The Operator Who<br><span class="accent">Has Done This Before.</span></h2>
+  <div class="prof-layout">
+    <div class="reveal">
+      <div class="photo-wrap">
+        <img src="data:image/jpeg;base64,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" alt="Thomas K. Matecki — CEO, NICO Capital">
+        <div class="photo-overlay"></div>
+      </div>
+      <div class="prof-name">Thomas K. Matecki</div>
+      <div class="prof-role">CEO &amp; Founder — NICO Capital Ltd</div>
+      <div class="prof-badge">London, United Kingdom</div>
+      <div class="prof-badge" style="margin-top:4px;color:var(--gold);border-color:rgba(201,168,76,.35);background:rgba(201,168,76,.04)">NICO Capital Ltd · Co. No. 16839544</div>
+    </div>
+    <div class="reveal d1">
+      <div class="pp-grid">
+        <div class="pp-box"><span class="pp-val">100K→3M+</span><div class="pp-lbl">Users scaled at Zilch in 18 months</div></div>
+        <div class="pp-box"><span class="pp-val">$2B+</span><div class="pp-lbl">Zilch valuation — BNPL unicorn</div></div>
+        <div class="pp-box"><span class="pp-val">18mo</span><div class="pp-lbl">Startup to unicorn infrastructure</div></div>
+        <div class="pp-box"><span class="pp-val">£10M</span><div class="pp-lbl">NICO Capital active seed round</div></div>
+      </div>
+      <div class="cred-block">
+        <div class="cred-lbl">Professional Track Record</div>
+        <div class="cred-item">
+          <div class="cred-role">Chief Technology Officer — Zilch Technology Ltd</div>
+          <div class="cred-co">London · BNPL Unicorn · $2B+ Valuation</div>
+          <div class="cred-desc">Led all technology infrastructure during Zilch's hyper-growth phase — scaling from 100,000 to over 3 million customers in 18 months. Built the real-time credit decisioning, payment processing, and compliance architecture that underpins one of Europe's most successful fintech unicorns. This is not an advisory role. Thomas built it, end to end, under pressure, at speed.</div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-role">CEO &amp; Founder — NICO Capital Ltd · Nexa9</div>
+          <div class="cred-co">London · Active £10M Seed Round · Multi-market deployments</div>
+          <div class="cred-desc">Founded NICO Capital with a mission to build financial infrastructure for chronically underbanked populations. Active £10M seed round. Deployments in the Caribbean, Dominican Republic, and Philippines — including a signed LOI with Rakuten Viber and a partnership with Al-Amanah Islamic Investment Bank. Nexa9 builds every product entirely in-house: no outsourcing, no dependencies.</div>
+        </div>
+      </div>
+      <div class="quote-block">"Iraq in 2026 stands at exactly the inflection point that Brazil occupied in 2013, when Nubank launched with a credit card and a conviction. The demographics, the regulatory momentum, the digital infrastructure — it all converges here. I have seen what happens when you get the technology right at the right moment. I built it at Zilch. Iraq is the moment."</div>
+      <div style="font-size:.76rem;color:rgba(255,255,255,.36);margin-top:5px">Thomas K. Matecki — CEO, NICO Capital Ltd</div>
+    </div>
+  </div>
+</section>
+<section id="ask" class="ask-bg">
+  <div class="sec-eyebrow">Part X — The Partnership Ask</div>
+  <span class="sec-ar">الجزء العاشر — طلب الشراكة</span>
+  <h2 class="sec-title">Three Clear Steps.<br>One <span class="accent">Transformative</span> Partnership.</h2>
+  <p class="sec-intro">NICO does not ask for permission to enter a market. We ask for the opportunity to earn it. Each step is gated by delivered outcomes — and each step unlocks the next.</p>
+  <div class="ask-grid">
+    <div class="ask-card reveal">
+      <div class="ask-ph">Step One</div>
+      <div class="ask-title">Sign the MOU</div>
+      <span class="ask-ar">توقيع مذكرة التفاهم</span>
+      <div class="ask-body">A formal Memorandum of Understanding between NICO Capital Ltd and the Central Bank of Iraq and/or Ministry of Finance. The MOU defines roles, regulatory cooperation, reporting obligations, and the pathway to e-payment licence approval. It is not a financial commitment. It is a sovereign signal that Iraq recognises the right partner when it arrives.</div>
+      <div class="ask-tag">Months 1–3</div>
+    </div>
+    <div class="ask-card reveal d1">
+      <div class="ask-ph">Step Two</div>
+      <div class="ask-title">Mandate the Pilot</div>
+      <span class="ask-ar">تفويض البرنامج التجريبي</span>
+      <div class="ask-body">NICO applies for an Electronic Payment Services Licence under CBI Regulation No. 2 (2024) and launches the UK–Iraq remittance corridor. The government facilitates licence approval, provides regulatory guidance, and co-designs the pilot framework. NICO commits to monthly CBI data sharing, full audit access, and transparent KPI reporting measured in users reached and volumes processed.</div>
+      <div class="ask-tag">Months 3–15</div>
+    </div>
+    <div class="ask-card reveal d2">
+      <div class="ask-ph">Step Three</div>
+      <div class="ask-title">Co-Invest in Scale</div>
+      <span class="ask-ar">الاستثمار المشترك في التوسع</span>
+      <div class="ask-body">Following a successful pilot, NICO invites the Iraqi government — through its sovereign investment vehicles, development funds, or state-linked entities — to become a strategic co-investor in NICO's Series A. This is not a grant. It is an equity partnership in a company that has already demonstrated delivery in Iraq. Terms and capital are subject to pilot outcomes and mutual agreement.</div>
+      <div class="ask-tag">Months 24–36</div>
+    </div>
+  </div>
+  <div class="cta-block reveal">
+    <div>
+      <div class="cta-title">The Window is Open.<br>The Question is Who Walks Through It.</div>
+      <span class="cta-ar">النافذة مفتوحة. السؤال هو من سيمر من خلالها.</span>
+      <div class="cta-body">Iraq's National Financial Inclusion Strategy 2025–2029 targets 50% account ownership and 85% digital payment adoption by 2030. The CBI has issued digital banking regulations and is reviewing 70+ licence applications. UNDP and USAID are committed. The policy momentum is extraordinary — and it will not wait. The first credible, compliant, internationally-backed operator to establish a government partnership in Iraq will shape its financial infrastructure for a generation. NICO Capital is ready. We ask for the opportunity to prove it.</div>
+    </div>
+    <div class="contact-box">
+      <div class="contact-head">Contact — NICO Capital Ltd</div>
+      <div style="margin-bottom:14px">
+        <div class="contact-role">Chief Executive Officer</div>
+        <div class="contact-name">Thomas K. Matecki</div>
+        <div style="font-size:.7rem;color:var(--muted)">NICO Capital Ltd · Co. No. 16839544</div>
+        <div style="font-size:.7rem;color:var(--muted)">London, United Kingdom</div>
+      </div>
+      <div class="gold-rule" style="margin:12px 0"></div>
+      <div style="margin-bottom:10px">
+        <div class="contact-role">Co-Founder &amp; CCO</div>
+        <div class="contact-name">Martin Lewicki</div>
+      </div>
+      <div>
+        <div class="contact-role">Board Member</div>
+        <div class="contact-name">Stuart Evers</div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="fl">NICO CAPITAL LTD</div>
+  <div class="flegal">Confidential &amp; Proprietary — June 2026<br>Prepared for senior government officials and financial regulators of the Republic of Iraq<br>Not for distribution without written consent of NICO Capital Ltd</div>
+  <div class="freg">Co. No. 16839544<br>England &amp; Wales</div>
+</footer>
+<script>
+const obsv = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(r=>obsv.observe(r));
+
+const CD = {
+  plugins:{legend:{labels:{color:'rgba(255,255,255,0.42)',font:{family:'Manrope',size:10}}}},
+  scales:{
+    x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(255,255,255,0.38)',font:{family:'Manrope',size:10}}},
+    y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(255,255,255,0.38)',font:{family:'Manrope',size:10}}}
+  }
+};
+
+new Chart(document.getElementById('chart-credit'),{
+  type:'bar',
+  data:{labels:['Iraq','Jordan','Egypt','Turkey','Saudi Arabia','UAE','Qatar'],
+    datasets:[{label:'Credit-to-GDP (%)',data:[9,28,34,48,52,64,100],
+      backgroundColor:['#FE1EDC','rgba(104,47,243,0.6)','rgba(104,47,243,0.6)','rgba(104,47,243,0.6)','rgba(104,47,243,0.6)','rgba(104,47,243,0.6)','rgba(17,243,254,0.55)'],
+      borderWidth:0,borderRadius:2}]},
+  options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.parsed.y}% of GDP`}}},
+    scales:{x:CD.scales.x,y:{...CD.scales.y,ticks:{...CD.scales.y.ticks,callback:v=>v+'%'},max:120}}}
+});
+
+new Chart(document.getElementById('chart-inclusion'),{
+  type:'line',
+  data:{labels:['2018','2019','2020','2021','2022','2023','2024','2025','2026F','2028F','2030F'],
+    datasets:[
+      {label:'Financial Inclusion (%)',data:[8,10,12,15,22,32,38,40,43,47,50],borderColor:'#11F3FE',backgroundColor:'rgba(17,243,254,0.06)',borderWidth:2,fill:true,tension:0.4,pointRadius:3,pointBackgroundColor:'#11F3FE'},
+      {label:'NFIS Target',data:[null,null,null,null,null,null,null,null,null,null,50],borderColor:'#C9A84C',borderWidth:1.5,borderDash:[6,4],pointRadius:5,pointBackgroundColor:'#C9A84C',fill:false}
+    ]},
+  options:{responsive:true,...CD,scales:{x:CD.scales.x,y:{...CD.scales.y,ticks:{...CD.scales.y.ticks,callback:v=>v+'%'},max:60}}}
+});
+
+new Chart(document.getElementById('chart-payments'),{
+  type:'bar',
+  data:{labels:['Jan 23','Jun 23','Jan 24','Jun 24','Aug 24','2025E'],
+    datasets:[{label:'Monthly Digital Payments (Trillion IQD)',data:[2.6,3.8,5.2,6.5,7.6,8.9],
+      backgroundColor:'rgba(104,47,243,0.5)',borderColor:'#682FF3',borderWidth:1,borderRadius:2}]},
+  options:{responsive:true,plugins:{legend:{display:false}},scales:{x:CD.scales.x,y:{...CD.scales.y,ticks:{...CD.scales.y.ticks,callback:v=>v+'T'}}}}
+});
+
+new Chart(document.getElementById('chart-unicorn'),{
+  type:'scatter',
+  data:{datasets:[
+    {label:'Nubank (Brazil)',data:[{x:60,y:4}],backgroundColor:'#11F3FE',pointRadius:14},
+    {label:'M-Pesa (Kenya)',data:[{x:75,y:5}],backgroundColor:'#C9A84C',pointRadius:12},
+    {label:'Paytm (India)',data:[{x:80,y:7}],backgroundColor:'#682FF3',pointRadius:16},
+    {label:'TymeBank (SA)',data:[{x:45,y:3}],backgroundColor:'#FE1EDC',pointRadius:10},
+    {label:'GCash (Philippines)',data:[{x:55,y:8}],backgroundColor:'rgba(17,243,254,0.6)',pointRadius:13},
+    {label:'NICO Iraq (projected)',data:[{x:60,y:6}],backgroundColor:'#FFFFFF',pointRadius:18,pointStyle:'star'}
+  ]},
+  options:{responsive:true,plugins:{legend:{labels:{color:'rgba(255,255,255,0.45)',font:{family:'Manrope',size:10}}},
+    tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.x}% unbanked at entry | ${c.parsed.y}yr to unicorn`}}},
+    scales:{
+      x:{...CD.scales.x,title:{display:true,text:'% Unbanked at Market Entry',color:'rgba(255,255,255,0.3)',font:{size:10}},min:30,max:90},
+      y:{...CD.scales.y,title:{display:true,text:'Years to Unicorn',color:'rgba(255,255,255,0.3)',font:{size:10}},min:0,max:12}
+    }}
+});
+
+new Chart(document.getElementById('chart-growth'),{
+  type:'line',
+  data:{labels:['Q1 27','Q3 27','Q1 28','Q3 28','Q1 29','Q3 29','Q1 30','Q3 30','Q1 31'],
+    datasets:[
+      {label:'Base Case',data:[5000,25000,80000,200000,450000,850000,1300000,1750000,2200000],borderColor:'#11F3FE',backgroundColor:'rgba(17,243,254,0.06)',borderWidth:2,fill:true,tension:0.45,pointRadius:3,pointBackgroundColor:'#11F3FE'},
+      {label:'Upside (Gov. distribution)',data:[10000,60000,200000,500000,1000000,1800000,2800000,3800000,5000000],borderColor:'#C9A84C',backgroundColor:'rgba(201,168,76,0.04)',borderWidth:1.5,borderDash:[5,4],fill:true,tension:0.45,pointRadius:2},
+      {label:'Conservative',data:[2000,10000,35000,85000,180000,360000,600000,880000,1200000],borderColor:'rgba(254,30,220,0.5)',borderWidth:1,borderDash:[3,3],fill:false,tension:0.45,pointRadius:2}
+    ]},
+  options:{responsive:true,...CD,scales:{x:CD.scales.x,y:{...CD.scales.y,ticks:{...CD.scales.y.ticks,
+    callback:v=>v>=1000000?(v/1000000).toFixed(1)+'M':v>=1000?(v/1000).toFixed(0)+'K':v}}}}
+});
+
+let revChart=null;
+function buildRevChart(data){
+  const ctx=document.getElementById('chart-revenue');
+  if(revChart)revChart.destroy();
+  revChart=new Chart(ctx,{type:'line',data:{labels:['Yr 1','Yr 2','Yr 3','Yr 4','Yr 5','Yr 6','Yr 7'],
+    datasets:[
+      {label:'Annual Revenue ($M)',data:data,borderColor:'#11F3FE',backgroundColor:'rgba(17,243,254,0.07)',borderWidth:2.5,fill:true,tension:0.45,pointRadius:4,pointBackgroundColor:'#11F3FE'},
+      {label:'Unicorn Threshold ($100M ARR)',data:[100,100,100,100,100,100,100],borderColor:'rgba(201,168,76,0.4)',borderWidth:1,borderDash:[6,4],pointRadius:0}
+    ]},
+    options:{responsive:true,...CD,scales:{x:CD.scales.x,y:{...CD.scales.y,ticks:{...CD.scales.y.ticks,callback:v=>'$'+v+'M'}}}}});
+}
+
+function calcUpdate(){
+  const s1=+document.getElementById('sl-useracq').value;
+  const s2=+document.getElementById('sl-remit').value;
+  const s3=+document.getElementById('sl-take').value;
+  const s4=+document.getElementById('sl-wallet').value;
+  const s5=+document.getElementById('sl-spend').value;
+  const s6=+document.getElementById('sl-inter').value;
+
+  document.getElementById('dv-useracq').textContent=s1.toLocaleString()+' users/mo';
+  document.getElementById('dv-remit').textContent='$'+s2+' / user';
+  document.getElementById('dv-take').textContent=s3.toFixed(1)+'%';
+  document.getElementById('dv-wallet').textContent=s4.toLocaleString();
+  document.getElementById('dv-spend').textContent='$'+s5+' / user';
+  document.getElementById('dv-inter').textContent=s6.toFixed(1)+'%';
+
+  const rU=s1*12*0.4, rMo=rU*s2*(s3/100);
+  const wMo=s4*s5*(s6/100);
+  const cAnn=(rMo+wMo)*12;
+  const yr5U=s1*12*5*0.35, r1m=yr5U*(s2*(s3/100)+s5*(s6/100))*12;
+  const be=rMo+wMo>0?Math.ceil(1500000/(rMo+wMo)):999;
+
+  document.getElementById('rv-remit').textContent='$'+(rMo/1000).toFixed(0)+'K';
+  document.getElementById('rv-wallet').textContent='$'+(wMo/1000).toFixed(0)+'K';
+  document.getElementById('rv-annual').textContent=cAnn>=1e6?'$'+(cAnn/1e6).toFixed(1)+'M':'$'+(cAnn/1000).toFixed(0)+'K';
+  document.getElementById('rv-1m').textContent=r1m>=1e6?'$'+(r1m/1e6).toFixed(0)+'M':'$'+(r1m/1000).toFixed(0)+'K';
+  document.getElementById('rv-be').textContent=be>120?'Beyond 10 yrs':'Month '+be;
+  const yt=r1m>=1e8?5:r1m>=5e7?7:r1m>=2e7?9:'10+';
+  document.getElementById('rv-uc').textContent=typeof yt==='number'?'Year '+yt+' at $'+(r1m/1e6).toFixed(0)+'M ARR':'Increase assumptions';
+
+  const rd=[0.1,(cAnn/1e6*0.3),(cAnn/1e6),(cAnn/1e6*2.5),(r1m/1e6*0.7),(r1m/1e6),(r1m/1e6*1.6)].map(v=>+v.toFixed(1));
+  buildRevChart(rd);
+}
+calcUpdate();
+</script>
+</body></html>
